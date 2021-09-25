@@ -1,6 +1,7 @@
 package br.com.til.ms.classroom.adapter.dto;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -12,14 +13,14 @@ public class LectureDTO {
 	
 	private String course;
 	
-	private Set<StudentDTO> students = new HashSet<StudentDTO>();
+	private List<StudentDTO> students = new ArrayList<StudentDTO>();
 
 	public LectureDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public LectureDTO(Long id, String speakerName, String course, Set<StudentDTO> students) {
+	public LectureDTO(Long id, String speakerName, String course, List<StudentDTO> students) {
 		super();
 		this.id = id;
 		this.speakerName = speakerName;
@@ -56,11 +57,11 @@ public class LectureDTO {
 		this.course = course;
 	}
 
-	public Set<StudentDTO> getStudents() {
+	public List<StudentDTO> getStudents() {
 		return students;
 	}
 
-	public void setStudents(Set<StudentDTO> students) {
+	public void setStudents(List<StudentDTO> students) {
 		this.students = students;
 	}
 

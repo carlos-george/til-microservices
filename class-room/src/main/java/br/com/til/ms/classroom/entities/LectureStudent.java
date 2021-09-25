@@ -2,6 +2,7 @@ package br.com.til.ms.classroom.entities;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class LectureStudent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(nullable = false)
 	private Long studentId;
 	
 	@ManyToOne
@@ -32,6 +34,12 @@ public class LectureStudent {
 		super();
 		this.id = id;
 		this.studentId = studentId;
+	}
+	
+	public LectureStudent(Long studentId, Lecture lecture) {
+		super();
+		this.studentId = studentId;
+		this.lecture = lecture;
 	}
 
 	public Long getId() {
