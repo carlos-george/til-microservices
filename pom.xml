@@ -24,6 +24,8 @@
 		<module>eureka-service</module>
 		<module>api-gateway</module>
 		<module>worker</module>
+		<module>class-room</module>
+		<module>send-mail</module>
 	</modules>
 
 	<dependencies>

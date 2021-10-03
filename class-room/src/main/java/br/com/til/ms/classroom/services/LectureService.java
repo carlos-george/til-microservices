@@ -38,7 +38,7 @@ public class LectureService {
 	private CourseFeignClientService courseFeignService; 
 	
 	@Autowired
-	private KafkaTemplate<String, String> sendMailTemplate;
+	private KafkaTemplate<String, StudentDTO> sendMailTemplate;
 	
 	public LectureDTO findLectureById(Long id) {
 		
@@ -75,9 +75,16 @@ public class LectureService {
 		
 		lectureStudentRepository.save(lectureStudent);
 		
-		logger.info("Subscribing student " + studentId);
+		Worker student = workerFeignService.findById(studentId).getBody();
 		
-		sendMailTemplate.send("topic.send.mail", studentId.toString());
+		StudentDTO studentDTO = new StudentDTO(lectureStudent.getStudentId(), student.getName());
+		
+		logger.info("Subscribing student " + studentDTO);
+		
+		sendMailTemplate.send("topic.send.mail", studentDTO).addCallback(
+                success -> logger.info("Messagem send" + success.getProducerRecord().value()),
+                failure -> logger.info("Message failure" + failure.getMessage())
+        );
 		
 	}
 
